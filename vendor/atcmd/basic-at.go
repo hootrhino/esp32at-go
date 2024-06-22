@@ -14,3 +14,13 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 package atcmd
+
+// AT
+func At() string {
+	return ""
+}
+
+// AT+GMR
+func GMR() string {
+	return ""
+}

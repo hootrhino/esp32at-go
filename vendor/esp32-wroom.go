@@ -39,27 +39,12 @@ func (Esp32 *Esp32Wroom) AT(command string, timeout time.Duration) (string, erro
 	if err != nil {
 		return "", err
 	}
-	buffer := [1]byte{}
-	var responseData []byte
-	b1 := 0
-	for {
-		if b1 == 4 {
-			break
-		}
-		deadline := time.Now().Add(timeout)
-		file.SetReadDeadline(deadline)
-		n, err := file.Read(buffer[:])
-		if err != nil {
-			return "", err
-		}
-		if n > 0 {
-			if buffer[0] == 10 {
-				b1++
-			}
-			if buffer[0] != 10 {
-				responseData = append(responseData, buffer[0])
-			}
-		}
+	buffer := [512]byte{}
+	deadline := time.Now().Add(timeout)
+	file.SetReadDeadline(deadline)
+	n, err := file.Read(buffer[:])
+	if err != nil {
+		return "", err
 	}
-	return string(responseData), nil
+	return string(buffer[:n]), nil
 }
