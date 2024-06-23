@@ -2,6 +2,7 @@ package main
 
 import (
 	esp32wroom "espressif-goat/bsp/esp32wroom"
+	esp32wroomAt "espressif-goat/bsp/esp32wroom/atcmd"
 	"fmt"
 	"time"
 
@@ -10,7 +11,6 @@ import (
 
 func main() {
 	SerialPeerRwTimeout := 50 * time.Millisecond
-	HwCardResponseTimeout := 300 * time.Millisecond
 	config := serial.Config{
 		Address:  "COM3",
 		BaudRate: 115200,
@@ -25,20 +25,10 @@ func main() {
 	}
 	Esp32 := esp32wroom.NewEsp32Wroom("ESP32-WROOM", serialPort)
 	Esp32.Flush()
-	{
-		Response, errAt := Esp32.AT("AT\r\n", HwCardResponseTimeout)
-		if errAt != nil {
-			panic(errAt)
-		}
-		fmt.Println("AT=", Response)
-
+	GMRResponse, err := esp32wroomAt.GMR(Esp32)
+	if err != nil {
+		panic(err)
 	}
-	{
-		Response, errAt := Esp32.AT("AT+GMR\r\n", HwCardResponseTimeout)
-		if errAt != nil {
-			panic(errAt)
-		}
-		fmt.Println("AT+GMR=", Response)
-	}
+	fmt.Println("AT=", GMRResponse)
 	serialPort.Close()
 }

@@ -25,8 +25,8 @@ import (
 	"time"
 )
 
-func NewEsp32Wroom(name string, io io.ReadWriteCloser) device.Device {
-	return &Esp32Wroom{name: name, io: io}
+func NewEsp32Wroom(name string, io io.ReadWriteCloser) Esp32Wroom {
+	return Esp32Wroom{name: name, io: io}
 }
 
 type Esp32Wroom struct {
