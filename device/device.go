@@ -15,8 +15,13 @@
 
 package device
 
-import "time"
+import (
+	"time"
+)
 
 type Device interface {
-	AT(command string, timeout time.Duration) (string, error)
+	Init(config map[string]any) error
+	AT(AtCmd string, HwCardResponseTimeout time.Duration) (ATResponse, error)
+	Flush()
+	Close() error
 }

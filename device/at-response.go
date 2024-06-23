@@ -13,38 +13,19 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-package vendor
+package device
 
-import (
-	"esp32at-go/device"
-	"os"
-	"time"
-)
+import "encoding/json"
 
-func NewEsp32Wroom(tty string) device.Device {
-	return &Esp32Wroom{tty: tty}
+type ATResponse struct {
+	Command string   `json:"command"`
+	Data    []string `json:"data"`
 }
 
-type Esp32Wroom struct {
-	tty string
-}
-
-func (Esp32 *Esp32Wroom) AT(command string, timeout time.Duration) (string, error) {
-	file, err := os.OpenFile(Esp32.tty, os.O_RDWR, os.ModePerm)
-	if err != nil {
-		return "", err
+func (O ATResponse) String() string {
+	if bytes, err := json.Marshal(O); err != nil {
+		return ""
+	} else {
+		return string(bytes)
 	}
-	defer file.Close()
-	_, err = file.WriteString(command)
-	if err != nil {
-		return "", err
-	}
-	buffer := [512]byte{}
-	deadline := time.Now().Add(timeout)
-	file.SetReadDeadline(deadline)
-	n, err := file.Read(buffer[:])
-	if err != nil {
-		return "", err
-	}
-	return string(buffer[:n]), nil
 }
