@@ -43,6 +43,25 @@ func AT(Esp32 bsp.Esp32Wroom) bool {
 
 /*
 *
+* 重启
+*
+ */
+func RST(Esp32 bsp.Esp32Wroom) bool {
+	ATResponse, err := Esp32.AT("AT+RST\r\n", 100)
+	if err != nil {
+		return false
+	}
+	if len(ATResponse.Data) != 1 {
+		return false
+	}
+	if ATResponse.Data[0] == "OK" {
+		return true
+	}
+	return false
+}
+
+/*
+*
 <AT version info>
 <SDK version info>
 <compile time>

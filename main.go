@@ -29,6 +29,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("AT=", GMRResponse)
+	fmt.Println("AT GMRResponse=", GMRResponse)
+	RSTResponse := esp32wroomAt.RST(Esp32)
+	fmt.Println("AT RSTResponse=", RSTResponse)
 	serialPort.Close()
 }
