@@ -17,8 +17,8 @@ package atcmd
 
 import (
 	"encoding/json"
-	bsp "espressif-goat/bsp/esp32wroom"
 	"fmt"
+	"rhilex-goat/device"
 	"time"
 )
 
@@ -27,7 +27,7 @@ import (
 * 测试: AT- OK
 *
  */
-func AT(Esp32 bsp.Esp32Wroom) bool {
+func AT(Esp32 device.Device) bool {
 	ATResponse, err := Esp32.AT("AT\r\n", 100)
 	if err != nil {
 		return false
@@ -46,7 +46,7 @@ func AT(Esp32 bsp.Esp32Wroom) bool {
 * 重启
 *
  */
-func RST(Esp32 bsp.Esp32Wroom) bool {
+func RST(Esp32 device.Device) bool {
 	ATResponse, err := Esp32.AT("AT+RST\r\n", 100)
 	if err != nil {
 		return false
@@ -83,7 +83,7 @@ func (O GMRResponse) String() string {
 		return string(bytes)
 	}
 }
-func GMR(Esp32 bsp.Esp32Wroom) (GMRResponse, error) {
+func GMR(Esp32 device.Device) (GMRResponse, error) {
 	GMRResponse := GMRResponse{}
 	ATResponse, err := Esp32.AT("AT+GMR\r\n", 200*time.Millisecond)
 	if err != nil {

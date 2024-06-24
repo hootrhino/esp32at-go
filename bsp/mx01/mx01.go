@@ -25,42 +25,42 @@ import (
 	"time"
 )
 
-func NewEsp8266(name string, io io.ReadWriteCloser) device.Device {
-	return &Esp8266{name: name, io: io}
+func NewMX01(name string, io io.ReadWriteCloser) device.Device {
+	return &MX01{name: name, io: io}
 }
 
-type Esp8266 struct {
+type MX01 struct {
 	name string
 	io   io.ReadWriteCloser
 }
 
-func (Esp8266 *Esp8266) Init(config map[string]any) error {
+func (MX01 *MX01) Init(config map[string]any) error {
 	return nil
 }
-func (Esp8266 *Esp8266) Close() error {
+func (MX01 *MX01) Close() error {
 	return nil
 }
-func (Esp8266 *Esp8266) Flush() {
+func (MX01 *MX01) Flush() {
 	var responseData [1]byte
 	for {
-		N, _ := Esp8266.io.Read(responseData[:])
+		N, _ := MX01.io.Read(responseData[:])
 		if N == 0 {
 			return
 		}
 	}
 }
-func (Esp8266 *Esp8266) AT(AtCmd string, HwCardResponseTimeout time.Duration) (device.ATResponse, error) {
+func (MX01 *MX01) AT(AtCmd string, HwCardResponseTimeout time.Duration) (device.ATResponse, error) {
 	ATResponse := device.ATResponse{Command: AtCmd}
-	_, errWrite := Esp8266.io.Write([]byte(AtCmd))
+	_, errWrite := MX01.io.Write([]byte(AtCmd))
 	if errWrite != nil {
 		return ATResponse, errWrite
 	}
 	var responseData [256]byte
-	acc := 0
 	Ctx, Cancel := context.WithTimeout(context.Background(), HwCardResponseTimeout)
 	wg := sync.WaitGroup{}
 	wg.Add(1)
 	var errRw error
+	acc := 0
 	go func(io io.ReadWriteCloser) {
 		defer wg.Done()
 		defer Cancel()
@@ -69,7 +69,7 @@ func (Esp8266 *Esp8266) AT(AtCmd string, HwCardResponseTimeout time.Duration) (d
 			case <-Ctx.Done():
 				return
 			default:
-				N, errRead := Esp8266.io.Read(responseData[acc:])
+				N, errRead := MX01.io.Read(responseData[acc:])
 				if errRead != nil {
 					if strings.Contains(errRead.Error(), "timeout") {
 						if N > 0 {
@@ -79,25 +79,30 @@ func (Esp8266 *Esp8266) AT(AtCmd string, HwCardResponseTimeout time.Duration) (d
 					}
 					errRw = errRead
 					return
-				} else {
+				}
+				if N > 0 {
 					acc += N
 				}
 			}
 		}
-	}(Esp8266.io)
+	}(MX01.io)
 	wg.Wait()
-	if (len(AtCmd) <= len(responseData)) && (len(AtCmd) <= acc) {
-		ResponseId := string(responseData[:len(AtCmd)])
-		atReturn := []string{}
-		if ResponseId != AtCmd {
-			return ATResponse, fmt.Errorf("AT command execute error")
-		}
-		for _, s := range strings.Split(string(responseData[len(AtCmd):acc]), "\r\n") {
-			if s != "" {
-				atReturn = append(atReturn, s)
+	atReturn := []string{}
+	if len(AtCmd)-4 > 0 {
+		// AT+NAME?\r\n
+		// +NAME:XXXXX
+		returnId := fmt.Sprintf("AT%s", string(responseData[:len(AtCmd)-4]))
+		ValidId := (returnId[:len((returnId))-1] == AtCmd[:len((AtCmd))-3])
+		if ValidId {
+			finalByte := responseData[len(AtCmd)-4 : acc]
+			for _, s := range strings.Split(string(finalByte), "\r\n") {
+				if s != "" {
+					atReturn = append(atReturn, s)
+				}
 			}
 		}
 		ATResponse.Data = atReturn
 	}
+
 	return ATResponse, errRw
 }

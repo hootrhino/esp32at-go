@@ -1,4 +1,4 @@
-module espressif-goat
+module rhilex-goat
 
 go 1.22
 

@@ -17,16 +17,16 @@ package bsp
 
 import (
 	"context"
-	"espressif-goat/device"
 	"fmt"
 	"io"
+	"rhilex-goat/device"
 	"strings"
 	"sync"
 	"time"
 )
 
-func NewEsp32Wroom(name string, io io.ReadWriteCloser) Esp32Wroom {
-	return Esp32Wroom{name: name, io: io}
+func NewEsp32Wroom(name string, io io.ReadWriteCloser) *Esp32Wroom {
+	return &Esp32Wroom{name: name, io: io}
 }
 
 type Esp32Wroom struct {

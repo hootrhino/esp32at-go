@@ -14,11 +14,28 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
+# RHILEX AT 操作库
+为了方便RHILEX用户使用串口指令集，RHILEX团队封装好了一些常见模块的AT指令库，方便集成使用。
+## 支持模块
+### ESP32 AT
+### ESP32 AT固件概述
 
-# ESP32 AT 指令封装
+ESP32 AT固件是一种专为ESP32开发板设计的固件，它允许开发者通过AT指令集来控制ESP32模块。这种固件支持Wi-Fi和蓝牙低功耗（BLE）操作，基本应用可以满足大多数需求。ESP32 AT固件包含了一系列特定功能的二进制文件，如启动加载器、AT应用固件、出厂配置参数等，这些文件共同工作以提供一个完整的解决方案，使ESP32能够作为一个独立的通信节点或与其他设备通信。
+
 官方手册：
-- https://robu.in/wp-content/uploads/2019/12/esp32_at_instruction_set_and_examples_en_1.0.pdf
 - https://docs.espressif.com/projects/esp-at/en/latest/esp32/AT_Command_Set/BLE_AT_Commands.html
+
+### MX-01
+MX-01 蓝牙模组是一款支持低功耗蓝牙协议的串口透传模组；模组具有小体积、高性能、高性价
+比、低功耗、平台兼容性强等优点；可以帮助用户快速掌握蓝牙技术，加速产品开发；模组已兼容的
+软件平台包括：IOS 应用程序、 Android 应用程序、微信小程序等。MCU 通过串口连接模组，可与手
+机、平板等设备进行数据通讯，轻松实现智能无线控制和数据采集；模组广泛应用在智能家居、共享
+售货机等领域。
+
+这款模块售价只有2元，很适合平时测试使用，因此在本仓库专门支持了一个库。
+
+官方手册：
+- `doc` 路径下mx-01.pdf。
 
 ## 使用
 下面是个简单的例子：
@@ -27,8 +44,8 @@
 package main
 
 import (
-	esp32wroom "espressif-goat/bsp/esp32wroom"
-	esp32wroomAt "espressif-goat/bsp/esp32wroom/atcmd"
+	esp32wroom "rhilex-goat/bsp/esp32wroom"
+	esp32wroomAt "rhilex-goat/bsp/esp32wroom/atcmd"
 	"fmt"
 	"time"
 
