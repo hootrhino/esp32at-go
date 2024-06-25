@@ -27,7 +27,7 @@ import (
 *
  */
 func MAC(Mx01 device.Device) (string, error) {
-	ATResponse, err := Mx01.AT("AT+MAC?\r\n", 1000*time.Millisecond)
+	ATResponse, err := Mx01.AT("AT+MAC?\r\n", 200*time.Millisecond)
 	if err != nil {
 		return "", err
 	}
@@ -43,7 +43,7 @@ func MAC(Mx01 device.Device) (string, error) {
 *
  */
 func NAME(Mx01 device.Device) (string, error) {
-	ATResponse, err := Mx01.AT("AT+NAME?\r\n", 1000*time.Millisecond)
+	ATResponse, err := Mx01.AT("AT+NAME?\r\n", 200*time.Millisecond)
 	if err != nil {
 		return "", err
 	}
@@ -60,7 +60,7 @@ func NAME(Mx01 device.Device) (string, error) {
  */
 
 func ADV(Mx01 device.Device) (string, error) {
-	ATResponse, err := Mx01.AT("AT+ADV?\r\n", 1000*time.Millisecond)
+	ATResponse, err := Mx01.AT("AT+ADV?\r\n", 200*time.Millisecond)
 	if err != nil {
 		return "", err
 	}
@@ -77,7 +77,7 @@ func ADV(Mx01 device.Device) (string, error) {
  */
 
 func UART(Mx01 device.Device) (string, error) {
-	ATResponse, err := Mx01.AT("AT+UART?\r\n", 1000*time.Millisecond)
+	ATResponse, err := Mx01.AT("AT+UART?\r\n", 200*time.Millisecond)
 	if err != nil {
 		return "", err
 	}
@@ -94,7 +94,7 @@ func UART(Mx01 device.Device) (string, error) {
  */
 
 func DEV(Mx01 device.Device) (string, error) {
-	ATResponse, err := Mx01.AT("AT+DEV?\r\n", 1000*time.Millisecond)
+	ATResponse, err := Mx01.AT("AT+DEV?\r\n", 200*time.Millisecond)
 	if err != nil {
 		return "", err
 	}
@@ -114,7 +114,7 @@ func DEV(Mx01 device.Device) (string, error) {
  */
 
 func AINTVL(Mx01 device.Device) (string, error) {
-	ATResponse, err := Mx01.AT("AT+AINTVL?\r\n", 1000*time.Millisecond)
+	ATResponse, err := Mx01.AT("AT+AINTVL?\r\n", 200*time.Millisecond)
 	if err != nil {
 		return "", err
 	}
@@ -131,7 +131,7 @@ func AINTVL(Mx01 device.Device) (string, error) {
  */
 
 func VER(Mx01 device.Device) (string, error) {
-	ATResponse, err := Mx01.AT("AT+VER?\r\n", 1000*time.Millisecond)
+	ATResponse, err := Mx01.AT("AT+VER?\r\n", 200*time.Millisecond)
 	if err != nil {
 		return "", err
 	}
@@ -148,7 +148,7 @@ func VER(Mx01 device.Device) (string, error) {
  */
 
 func TXPOWER(Mx01 device.Device) (string, error) {
-	ATResponse, err := Mx01.AT("AT+TXPOWER?\r\n", 1000*time.Millisecond)
+	ATResponse, err := Mx01.AT("AT+TXPOWER?\r\n", 200*time.Millisecond)
 	if err != nil {
 		return "", err
 	}
@@ -165,7 +165,7 @@ func TXPOWER(Mx01 device.Device) (string, error) {
  */
 
 func UUIDS(Mx01 device.Device) (string, error) {
-	ATResponse, err := Mx01.AT("AT+UUIDS?\r\n", 1000*time.Millisecond)
+	ATResponse, err := Mx01.AT("AT+UUIDS?\r\n", 200*time.Millisecond)
 	if err != nil {
 		return "", err
 	}
@@ -182,7 +182,7 @@ func UUIDS(Mx01 device.Device) (string, error) {
  */
 
 func UUIDN(Mx01 device.Device) (string, error) {
-	ATResponse, err := Mx01.AT("AT+UUIDN?\r\n", 1000*time.Millisecond)
+	ATResponse, err := Mx01.AT("AT+UUIDN?\r\n", 200*time.Millisecond)
 	if err != nil {
 		return "", err
 	}
@@ -199,7 +199,7 @@ func UUIDN(Mx01 device.Device) (string, error) {
  */
 
 func UUIDW(Mx01 device.Device) (string, error) {
-	ATResponse, err := Mx01.AT("AT+UUIDW?\r\n", 1000*time.Millisecond)
+	ATResponse, err := Mx01.AT("AT+UUIDW?\r\n", 200*time.Millisecond)
 	if err != nil {
 		return "", err
 	}
@@ -216,7 +216,7 @@ func UUIDW(Mx01 device.Device) (string, error) {
  */
 
 func AMDATA(Mx01 device.Device) (string, error) {
-	ATResponse, err := Mx01.AT("AT+AMDATA?\r\n", 1000*time.Millisecond)
+	ATResponse, err := Mx01.AT("AT+AMDATA?\r\n", 200*time.Millisecond)
 	if err != nil {
 		return "", err
 	}
