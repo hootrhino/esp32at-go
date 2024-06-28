@@ -18,10 +18,10 @@ package test
 import (
 	"testing"
 
-	mx01 "rhilex-goat/bsp/mx01"
+	mx01 "github.com/hootrhino/rhilex-goat/bsp/mx01"
 
 	"fmt"
-	mx01At "rhilex-goat/bsp/mx01/atcmd"
+	mx01At "github.com/hootrhino/rhilex-goat/bsp/mx01/atcmd"
 	"time"
 
 	serial "github.com/hootrhino/goserial"

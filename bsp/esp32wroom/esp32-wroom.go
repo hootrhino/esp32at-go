@@ -13,16 +13,17 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-package bsp
+package esp32
 
 import (
 	"context"
 	"fmt"
 	"io"
-	"rhilex-goat/device"
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/hootrhino/rhilex-goat/device"
 )
 
 func NewEsp32Wroom(name string, io io.ReadWriteCloser) *Esp32Wroom {

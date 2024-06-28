@@ -17,8 +17,9 @@ package atcmd
 
 import (
 	"fmt"
-	"rhilex-goat/device"
 	"time"
+
+	"github.com/hootrhino/rhilex-goat/device"
 )
 
 /*
