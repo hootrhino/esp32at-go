@@ -92,11 +92,19 @@ func (MX01 *MX01) AT(AtCmd string, HwCardResponseTimeout time.Duration) (device.
 		// AT+NAME?\r\n
 		// +NAME:XXXXX
 		returnId := fmt.Sprintf("AT%s", string(responseData[:len(AtCmd)-4]))
-		ValidId := (returnId[:len((returnId))-1] == AtCmd[:len((AtCmd))-3])
+		ValidId := (returnId[:len((returnId))-3] == AtCmd[:len((AtCmd))-5])
 		if ValidId {
-			finalByte := responseData[len(AtCmd)-4 : acc]
+			finalByte := responseData[:acc]
 			for _, s := range strings.Split(string(finalByte), "\r\n") {
 				if s != "" {
+					atReturn = append(atReturn, s)
+				}
+			}
+		} else { //AT+NAME=<>\r\n; OK/ERROR
+			if acc != 0 {
+				finalByte := responseData[:acc-2]
+				s := string(finalByte)
+				if s == "OK" || s == "ERROR" {
 					atReturn = append(atReturn, s)
 				}
 			}
