@@ -1,4 +1,4 @@
-module rhilex-goat
+module github.com/hootrhino/rhilex-goat
 
 go 1.22
 

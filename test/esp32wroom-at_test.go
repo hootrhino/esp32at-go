@@ -19,8 +19,8 @@ import (
 	"testing"
 
 	"fmt"
-	esp32wroom "rhilex-goat/bsp/esp32wroom"
-	esp32wroomAt "rhilex-goat/bsp/esp32wroom/atcmd"
+	esp32wroom "github.com/hootrhino/rhilex-goat/bsp/esp32wroom"
+	esp32wroomAt "github.com/hootrhino/rhilex-goat/bsp/esp32wroom/atcmd"
 	"time"
 
 	serial "github.com/hootrhino/goserial"

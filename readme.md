@@ -43,8 +43,8 @@ MX-01 蓝牙模组是一款支持低功耗蓝牙协议的串口透传模组；�
 package main
 
 import (
-	esp32wroom "rhilex-goat/bsp/esp32wroom"
-	esp32wroomAt "rhilex-goat/bsp/esp32wroom/atcmd"
+	esp32wroom "github.com/hootrhino/rhilex-goat/bsp/esp32wroom"
+	esp32wroomAt "github.com/hootrhino/rhilex-goat/bsp/esp32wroom/atcmd"
 	"fmt"
 	"time"
 

@@ -19,8 +19,9 @@ import (
 	"errors"
 	"fmt"
 	"regexp"
-	"rhilex-goat/device"
 	"time"
+
+	"github.com/hootrhino/rhilex-goat/device"
 )
 
 /*
